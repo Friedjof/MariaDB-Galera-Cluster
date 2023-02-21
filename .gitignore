@@ -1,5 +1,7 @@
 /.idea
 
 /data/*/*
+!/data/*/.gitkeep
 !/data/conf.d/*
+
 /envs/*.env

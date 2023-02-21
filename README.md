@@ -70,4 +70,5 @@ sudo rm -rf data/01 data/02 data/03
 ```
 ```bash
 mkdir data/01 data/02 data/03
+sudo touch data/01/.gitkeep data/02/.gitkeep data/03/.gitkeep
 ```

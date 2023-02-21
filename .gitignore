@@ -1,0 +1,5 @@
+/.idea
+
+/data/*/*
+!/data/conf.d/*
+/envs/*.env

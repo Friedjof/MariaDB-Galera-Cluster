@@ -1,7 +1,9 @@
 /.idea
 
-/data/*/*
-!/data/*/.gitkeep
-!/data/conf.d/*
+/data/mariadb/0*/*
+/data/proxysql/0*/*
+!/data/mariadb/0*/.gitkeep
+!/data/proxysql/0*/.gitkeep
+!/data/mariadb/conf.d/*
 
 /envs/*.env

@@ -10,8 +10,8 @@ services:
       - envs/global.env-template
       - envs/00.env-template
     volumes:
-      - ./data/01/:/var/lib/mysql
-      - ./data/conf.d/:/etc/mysql/mariadb.conf.d
+      - ./data/mariadb/01/:/var/lib/mysql
+      - ./data/mariadb/conf.d/:/etc/mysql/mariadb.conf.d
     command:
       - --wsrep-new-cluster
       - --wsrep_cluster_name=galera
@@ -30,8 +30,8 @@ services:
     env_file:
       - envs/global.env-template
     volumes:
-      - ./data/01/:/var/lib/mysql
-      - ./data/conf.d/:/etc/mysql/mariadb.conf.d
+      - ./data/mariadb/01/:/var/lib/mysql
+      - ./data/mariadb/conf.d/:/etc/mysql/mariadb.conf.d
     command:
       - --wsrep_cluster_name=galera
       - --wsrep_cluster_address=gcomm://10.5.0.10,10.5.0.11,10.5.0.12,10.5.0.13
@@ -49,8 +49,8 @@ services:
     env_file:
       - envs/global.env-template
     volumes:
-      - ./data/02/:/var/lib/mysql
-      - ./data/conf.d/:/etc/mysql/mariadb.conf.d
+      - ./data/mariadb/02/:/var/lib/mysql
+      - ./data/mariadb/conf.d/:/etc/mysql/mariadb.conf.d
     command:
       - --wsrep_cluster_name=galera
       - --wsrep_cluster_address=gcomm://10.5.0.10,10.5.0.11,10.5.0.12,10.5.0.13
@@ -68,8 +68,8 @@ services:
     env_file:
       - envs/global.env-template
     volumes:
-      - ./data/03/:/var/lib/mysql
-      - ./data/conf.d/:/etc/mysql/mariadb.conf.d
+      - ./data/mariadb/03/:/var/lib/mysql
+      - ./data/mariadb/conf.d/:/etc/mysql/mariadb.conf.d
     command:
       - --wsrep_cluster_name=galera
       - --wsrep_cluster_address=gcomm://10.5.0.10,10.5.0.11,10.5.0.12,10.5.0.13
@@ -78,6 +78,30 @@ services:
     networks:
       databases:
         ipv4_address: 10.5.0.13
+
+  01.proxysql:
+    image: severalnines/proxysql:2
+    container_name: 01.proxysql
+    hostname: 01.proxysql.local
+    restart: always
+    volumes:
+      - ./data/proxysql/01/:/var/lib/proxysql
+      - ./data/proxysql/proxysql.cnf:/etc/proxysql.cnf:ro
+    networks:
+      databases:
+        ipv4_address: 10.5.0.21
+
+  02.proxysql:
+    image: severalnines/proxysql:2
+    container_name: 02.proxysql
+    hostname: 02.proxysql.local
+    restart: always
+    volumes:
+      - ./data/proxysql/02/:/var/lib/proxysql
+      - ./data/proxysql/proxysql.cnf:/etc/proxysql.cnf:ro
+    networks:
+      databases:
+        ipv4_address: 10.5.0.22
 
 networks:
   databases:

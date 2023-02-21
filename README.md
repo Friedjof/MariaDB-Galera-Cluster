@@ -32,15 +32,15 @@ The Bootstrap Node is the first Node in the Cluster. It is used to bootstrap the
 ```bash
 docker compose up -d 00.mariadb
 ```
-#### Join Node 2 and 3
+#### Join Node 2, 3, 4, 5 and 6
 ```bash
-docker compose up -d 02.mariadb 03.mariadb
+docker compose up -d 02.mariadb 03.mariadb 04.mariadb 05.mariadb 06.mariadb
 ```
 Wait a few seconds for initialization.
 
 Restart the two Nodes to join the Cluster.
 ```bash
-docker compose restart 02.mariadb 03.mariadb
+docker compose restart 02.mariadb 03.mariadb 04.mariadb 05.mariadb 06.mariadb
 ```
 Wait a few minutes for the Cluster to be ready with the following messages:
 ```text
@@ -49,12 +49,9 @@ Wait a few minutes for the Cluster to be ready with the following messages:
 ```text
 [Note] WSREP: Member 2.0 (02.mariadb.local) synced with group.
 ```
-Show the Logs of the Node 2 and 3 to see the Cluster status.
+Show the Logs of a Node to see the Cluster Status.
 ```bash
-docker logs -f 02.mariadb
-```
-```bash
-docker logs -f 03.mariadb
+docker logs -f <id>.mariadb
 ```
 #### Stop Node 0 and start Node 1
 ```bash
@@ -66,9 +63,9 @@ docker compose up -d 01.mariadb
 ## Reset the Repository
 ```bash
 docker compose down
-sudo rm -rf data/01 data/02 data/03
+sudo rm -rf data/01 data/02 data/03 data/04 data/05 data/06
 ```
 ```bash
-mkdir data/01 data/02 data/03
-sudo touch data/01/.gitkeep data/02/.gitkeep data/03/.gitkeep
+mkdir data/01 data/02 data/03 data/04 data/05 data/06
+sudo touch data/01/.gitkeep data/02/.gitkeep data/03/.gitkeep data/04/.gitkeep data/05/.gitkeep data/06/.gitkeep
 ```

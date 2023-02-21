@@ -27,6 +27,8 @@ cp ./envs/global.env-template ./envs/global.env
 Now you can edit the environment files `00.env` and `global.env` to your needs.
 - The `00.env` file contains the environment variables for the Bootstrap Node.
 - The `global.env` file contains the environment variables for all Nodes.
+
+**Node**: You might have to change the `MYSQL_ROOT_PASSWORD` in the `docker-compose.yml` file.
 #### Bootstrap Node
 The Bootstrap Node is the first Node in the Cluster. It is used to bootstrap the Cluster.
 ```bash
@@ -72,3 +74,21 @@ sudo rm -rf data/01 data/02 data/03
 mkdir data/01 data/02 data/03
 sudo touch data/01/.gitkeep data/02/.gitkeep data/03/.gitkeep
 ```
+
+## More useful commands
+### Show running containers
+```bash
+docker compose ps
+```
+### Start Node 1, 2 and 3
+```bash
+docker compose up -d 01.mariadb 02.mariadb 03.mariadb
+```
+### Show the Cluster Status
+```sql
+select variable_name, variable_value from information_schema.global_status where variable_name in ("wsrep_cluster_size", "wsrep_local_state_comment", "wsrep_cluster_status", "wsrep_incoming_addresses")
+```
+
+## Sources
+- [MariaDB Galera Cluster](https://mariadb.com/kb/en/mariadb/mariadb-galera-cluster/)
+- https://severalnines.com/blog/running-mariadb-galera-cluster-without-container-orchestration-tools-part-one/
